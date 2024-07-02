@@ -21,8 +21,8 @@ const Menu = () => {
     fetchlist()
   }, [])
   return (
-    <div className='w-full flex justify-center'>
-      <div className='w-[60%] flex flex-col gap-5 max-sm:w-[80%]'>
+    <div className='w-full flex justify-center py-9'>
+      <div className='w-[60%] flex flex-col gap-5 max-sm:w-[90%]'>
         {listchat.map((e) => (
           <Link key={e.$id} to={`/chat/${userid}/${e.$id}`}>
             <div className='h-20 p-3 bg-neutral-800 overflow-hidden'>

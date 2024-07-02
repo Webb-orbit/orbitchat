@@ -12,3 +12,8 @@
 .scrollbar::-webkit-scrollbar{
     height: 2px;
 }
+
+.inter{
+    font-family:"Inter", Arial, Helvetica, sans-serif;
+  }
+  

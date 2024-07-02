@@ -1,14 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import {useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { passwordok } from '../store/passslice'
 import { useNavigate } from 'react-router-dom'
 
 const Password = () => {
+    
     const [number, setnumber] = useState(0)
     const { passmached } = useSelector(state => state.passslice)
     const disp = useDispatch()
-    const [update, setupdate] = useState(true)
     const {watch, register} = useForm()
     const watchany = watch()
     const naviget = useNavigate()
@@ -22,7 +22,7 @@ const Password = () => {
         }
         console.log(ram);
         setnumber(ram)
-    }, [update])
+    }, [])
 
     const chack = ()=>{
         if (watchany.code) {
@@ -45,7 +45,7 @@ const Password = () => {
                 <p className='text-[1.1rem] text-neutral-200 uppercase font-medium'>{number}</p>
                 <input
                 {...register("code")}
-                type="text"  placeholder='code' className=' text-center w-full outline-none  bg-neutral-700/80 py-1 px-2 rounded-sm' />
+                type="text"  placeholder='code' className=' text-black placeholder:text-black w-full outline-none  bg-neutral-200 py-1 px-2 rounded-sm' />
             </div>
         </div>
     ) : null

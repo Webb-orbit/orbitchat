@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Chatbase from '../appwrite/chatbase'
 import { useNavigate, useParams } from 'react-router-dom'
 import AuthClient from '../appwrite/auth'
+import Cards from './Cards'
 
 const Chat = () => {
   const { userid, chatid } = useParams()
@@ -10,6 +11,7 @@ const Chat = () => {
   const [mass, setmass] = useState("")
   const [sending, setsending] = useState(false)
   const [updater, setupdater] = useState(false)
+  const [settopenr, setsettopenr] = useState(false)
   const naviget = useNavigate()
 
   const getchat = async () => {
@@ -52,13 +54,11 @@ const Chat = () => {
       let massis = mass.trim()
       let inputarr = JSON.stringify({ massis, nowtime })
       const newchat = [...initchat, inputarr]
-      console.log(newchat);
-      setinitchat(newchat)
       const send = await Chatbase.updatechat(chatid, { chatsarr: newchat })
       if (send) {
+        setinitchat(send.chatsarr)
         setsending(false)
         setmass("")
-        console.log(send);
       }
     } catch (error) {
       setsending(false)
@@ -66,9 +66,33 @@ const Chat = () => {
     }
   }
 
+  const cleanup = async()=>{
+    try {
+      const clean = await Chatbase.updatechat(chatid, { chatsarr: [] })
+      if (clean) {
+        setupdater(pre => !pre)
+        setsettopenr(false)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const deletechat = async()=>{
+    try {
+      const dele = await Chatbase.deletechat(chatid)
+      if (dele) {
+        setsettopenr(false)
+        naviget("/")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     firstget()
-  }, [])
+  }, [chatid])
 
   useEffect(() => {
     getchat()
@@ -79,7 +103,7 @@ const Chat = () => {
       <div className='w-full flex flex-col items-center h-full inter'>
         <div className=' self-start p-3 w-full flex items-center justify-between'>
           <h2 className='text-[2rem]'>{alldata.title}</h2>
-          <button className='material-symbols-outlined'>settings</button>
+          <button onClick={()=>setsettopenr(pre=> !pre)} className='material-symbols-outlined'>settings</button>
         </div>
         <div className='w-[60%] h-full flex flex-col gap-4  items-end py-20 max-sm:w-[90%]'>
           {initchat?.map((e, i) => (
@@ -96,11 +120,18 @@ const Chat = () => {
             onChange={(e) => setmass(e.target.value)}
             spellCheck={false}
             disabled={sending}
-            placeholder='hello' className='w-[90%] h-[5rem] text-neutral-100 text-[0.9rem] bg-transparent border-none outline-none'></textarea>
+            placeholder='hello moto' className='w-[90%] h-[5rem] text-neutral-100 text-[0.9rem] bg-transparent border-none outline-none'></textarea>
 
           <button disabled={sending} className={`material-symbols-outlined p-1 text-[1rem] bg-white text-black rounded-full ${sending && "animate-pulse"} `} onClick={sendmass}>{sending ? "progress_activity" : "arrow_circle_up"}</button>
         </div>
       </div>
+
+      <Cards lable={"settings"} setopener={setsettopenr} opener={settopenr}>
+        <div className='p-4 flex flex-col gap-5'>
+          <button onClick={cleanup} className='flex items-center rounded-md bg-neutral-800/30 gap-6 px-5 py-2 text-[1.1rem] font-semibold capitalize'><span className='material-symbols-outlined'>vacuum</span>clean up </button>
+          <button onClick={deletechat} className='flex items-center rounded-md bg-neutral-800/30 gap-6 px-5 py-2 text-[1.1rem] font-semibold capitalize'><span className='material-symbols-outlined'>delete</span>destroy section </button>
+        </div>
+      </Cards>
     </>
   ) : null
 }

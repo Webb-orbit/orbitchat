@@ -11,6 +11,7 @@ import Createorbit from './compons/Createorbit.jsx'
 import Chat from './compons/Chat.jsx'
 import Password from './compons/Password.jsx'
 import AuthPass from './compons/AuthPass.jsx'
+import Profile from './compons/Profile.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -20,9 +21,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/' element={<App />}>
             <Route path='/' element={<AuthPass pass={true} auth={true} child={<Home />}/>} />
             <Route path='/login' element={<AuthPass pass={false} auth={false} child={<Login />}/>} />
-            <Route path='/code' element={<Password />} />
-            <Route path='/create-orbit' element={<Createorbit />} />
-
+            <Route path='/code' element={<AuthPass pass={false} auth={true} child={<Password />}/>} />
+            <Route path='/create-orbit' element={<AuthPass pass={false} auth={false} child={<Createorbit />}/>} />
+            <Route path='/profile' element={<AuthPass pass={true} auth={true} child={<Profile />}/>} />
             <Route path='/chat/:userid/:chatid' element={<AuthPass pass={true} auth={true} child={<Chat />}/>} />
           </Route>
         </Routes>

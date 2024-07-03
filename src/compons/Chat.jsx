@@ -3,6 +3,8 @@ import Chatbase from '../appwrite/chatbase'
 import { useNavigate, useParams } from 'react-router-dom'
 import AuthClient from '../appwrite/auth'
 import Cards from './Cards'
+import { useDispatch } from 'react-redux'
+import { showt } from '../store/toastslice'
 
 const Chat = () => {
   const { userid, chatid } = useParams()
@@ -13,6 +15,7 @@ const Chat = () => {
   const [updater, setupdater] = useState(false)
   const [settopenr, setsettopenr] = useState(false)
   const naviget = useNavigate()
+  const Dispatch = useDispatch() 
 
   const getchat = async () => {
     try {
@@ -40,8 +43,11 @@ const Chat = () => {
         }
       } else {
         naviget("/")
+        Dispatch(showt({mass:"invalid argument", color:"text-black", time:2000, icon:"error"}))
       }
     } catch (error) {
+      naviget("/")
+      Dispatch(showt({mass:"something wrong", color:"text-black", time:2000, icon:"error"}))
       console.log(error);
     }
   }
@@ -61,6 +67,7 @@ const Chat = () => {
         setmass("")
       }
     } catch (error) {
+      Dispatch(showt({mass:"something wrong", color:"text-black", time:1000, icon:"error"}))
       setsending(false)
       console.log(error);
     }
@@ -75,6 +82,7 @@ const Chat = () => {
       }
     } catch (error) {
       console.log(error);
+      Dispatch(showt({mass:"something wrong", color:"text-black", time:1000, icon:"error"}))
     }
   }
 
@@ -86,6 +94,7 @@ const Chat = () => {
         naviget("/")
       }
     } catch (error) {
+      Dispatch(showt({mass:"something wrong", color:"text-black", time:1000, icon:"error"}))
       console.log(error);
     }
   }

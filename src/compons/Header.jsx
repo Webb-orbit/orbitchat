@@ -2,14 +2,15 @@ import React from 'react'
 import baner from "../assets/104057.jpg"
 import { useForm } from 'react-hook-form'
 import Chatbase from '../appwrite/chatbase'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { showt } from '../store/toastslice'
 
 const Header = () => {
     const { setError, register, handleSubmit, formState: { errors } } = useForm()
     const navi = useNavigate()
     const { userid } = useSelector(state => state.authslice)
-
+    const Dispatch = useDispatch() 
     const createchats = async (data) => {
         try {
             console.log(data, userid);
@@ -18,6 +19,7 @@ const Header = () => {
                 navi(`/chat/${userid}/${crete.$id}`)
             }
         } catch (error) {
+            Dispatch(showt({mass:"something wrong", color:"text-black", time:1500, icon:"error"}))
             setError("root", { message: error.response.message })
         }
     }
@@ -30,12 +32,13 @@ const Header = () => {
                     <div className='flex gap-3 w-[30rem] max-sm:w-[100%]'>
                     <input
                         {...register("name")}
+                        maxLength={20}
                         className=' w-full   outline-none bg-neutral-100 py-1 px-2 text-black rounded-lg' type="text" />
                     <button type='submit' className='py-1 px-3 bg-green-500 text-black font-semibold uppercase rounded-lg'>create</button>
                         </div>
                 </form>
             </div>
-            <img src={baner} className=' brightness-50 z-[1] absolute w-[100%] h-full object-cover object-center ' />
+            <img src={baner} className='z-[1] absolute w-[100%] h-full object-cover object-center ' />
         </div>
     )
 }

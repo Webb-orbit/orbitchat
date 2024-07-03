@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authslice from "./authslice";
-import menuslice from "./menuslice";
 import passslice from "./passslice";
+import toastslice from "./toastslice";
 
 const store = configureStore({
     reducer:{
         authslice,
-        menuslice,
-        passslice
+        passslice,
+        toastslice
     },
 })
 

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { storelogin, storelogout } from './store/authslice';
 import Navbar from './compons/Navbar';
 import { Outlet } from 'react-router-dom';
+import Toast from './compons/Toast';
 
 const App = () => {
   const [loader, setloader] = useState(true)
@@ -35,6 +36,7 @@ const App = () => {
   ) : (
     <>
       <Navbar />
+      <Toast/>
       <main className='w-full min-h-screen h-full pt-12 bg-neutral-950 text-neutral-100'>
         <Outlet />
       </main>

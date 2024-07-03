@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { menutoggle } from '../store/menuslice'
 import Cards from './Cards'
 import Menu from './Menu'
 
 const Navbar = () => {
   const {status} = useSelector(state=> state.authslice)
-  const disp = useDispatch()
   const [menuopener, setmenuopener] = useState(false)
   return (
     <>

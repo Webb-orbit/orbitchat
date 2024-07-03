@@ -30,6 +30,9 @@ class author {
     async appwritelogout() {
         return await this.account.deleteSession("current")
     }
+    async sessons(){
+        return await this.account.listSessions()
+    }
 
     async updateemail(email, password) {
         return await this.account.updateEmail(email, password)

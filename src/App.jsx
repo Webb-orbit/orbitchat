@@ -3,7 +3,7 @@ import AuthClient from './appwrite/auth';
 import { useDispatch } from 'react-redux';
 import { storelogin, storelogout } from './store/authslice';
 import Navbar from './compons/Navbar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Toast from './compons/Toast';
 
 const App = () => {
@@ -31,6 +31,8 @@ const App = () => {
   useEffect(() => {
     init()
   }, [])
+
+
   return loader ? (
     <div>load</div>
   ) : (

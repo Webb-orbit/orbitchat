@@ -116,7 +116,7 @@ const Chat = () => {
         </div>
         <div className='w-[60%] h-full flex flex-col gap-4  items-end py-20 max-sm:w-[90%]'>
           {initchat?.map((e, i) => (
-            <div key={i} className='w-fit max-w-[100%]  h-full scrollbar overflow-x-scroll bg-neutral-800 px-2 pt-2 pb-1 rounded-md text-neutral-300'>
+            <div key={i} className='w-fit max-w-[100%]  h-full scrollbar overflow-x-scroll bg-neutral-100 px-2 pt-2 pb-1 rounded-md text-black'>
               <p className='text-wrap text-left whitespace-pre-wrap'>{JSON.parse(e).massis}</p>
               <p className='text-wrap text-neutral-400 text-right text-[0.5rem] whitespace-pre-wrap'>{JSON.parse(e).nowtime}</p>
             </div>

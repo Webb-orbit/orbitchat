@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { updateurl } from '../store/prepageslice'
@@ -16,7 +16,7 @@ const AuthPass = ({ pass = true, auth = true, child }) => {
       naviget("/login")
     } else if (!auth && status !== auth) {
       naviget("/")
-    } else if (pass && passmached !== pass) {
+    } else if (!pass && passmached !== pass) {
       naviget("/code")
     }
 

@@ -12,9 +12,14 @@ import Chat from './compons/Chat.jsx'
 import Password from './compons/Password.jsx'
 import AuthPass from './compons/AuthPass.jsx'
 import Profile from './compons/Profile.jsx'
+import 'react-loading-skeleton/dist/skeleton.css'
+import { SkeletonTheme } from 'react-loading-skeleton'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <SkeletonTheme baseColor="#202020" highlightColor="#444">
+
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
@@ -29,5 +34,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </Routes>
       </BrowserRouter>
     </Provider>
+    </SkeletonTheme>
   </React.StrictMode>,
 )

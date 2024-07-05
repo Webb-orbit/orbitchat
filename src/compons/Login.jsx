@@ -1,4 +1,3 @@
-import React from 'react'
 import { useForm } from 'react-hook-form'
 import AuthClient from '../appwrite/auth'
 import { useDispatch } from 'react-redux'
@@ -31,7 +30,7 @@ const Login = () => {
           <div>
             <input
               {...register("username", {required:"required"})}
-              type="email" placeholder='username' className={` w-full outline-none  bg-neutral-700/80 py-1 px-2 rounded-sm ${errors.username && "border-[1px] border-red-500/70" }`} />
+              type="text" placeholder='username' className={` w-full outline-none  bg-neutral-700/80 py-1 px-2 rounded-sm ${errors.username && "border-[1px] border-red-500/70" }`} />
               {errors.username && <p className='text-[0.7rem] text-red-300 font-medium'>{errors.username.message}</p>}
           </div>
           <div>
@@ -44,7 +43,7 @@ const Login = () => {
         </form>
 
         <div >
-          <p className=' capitalize text-[0.9rem] font-medium'>don't have an orbiter <Link to={"/create-orbit"} className='text-green-300'>create new</Link></p>
+          <p className='capitalize text-[0.9rem] font-medium'>dont have an orbiter <Link to={"/create-orbit"} className='text-green-300'>create new</Link></p>
         </div>
       </div>
     </div>

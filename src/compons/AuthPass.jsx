@@ -16,7 +16,7 @@ const AuthPass = ({ pass = true, auth = true, child }) => {
       naviget("/login")
     } else if (!auth && status !== auth) {
       naviget("/")
-    } else if (!pass && passmached !== pass) {
+    } else if (pass && passmached !== pass) {
       naviget("/code")
     }
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { passwordok } from '../store/passslice'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Password = () => {
 
@@ -49,7 +49,7 @@ const Password = () => {
                     type="text" placeholder='code' className=' text-black placeholder:text-black w-full outline-none  bg-neutral-200 py-1 px-2 rounded-sm' />
             </div>
         </div>
-    ) : null
+    ) : <div className='w-full h-screen flex items-center justify-center capitalize font-medium text-green-400 inter'><Link to={"/"}>back home</Link></div>
 }
 
 export default Password

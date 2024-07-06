@@ -40,7 +40,7 @@ const App = () => {
     <>
       <Navbar />
       <Toast/>
-      <main className='w-full min-h-screen max-h-full pt-12 bg-neutral-950 text-neutral-100'>
+      <main className=' inter w-full min-h-screen max-h-full pt-12 bg-neutral-950 text-neutral-100'>
         <Outlet />
       </main>
     </>

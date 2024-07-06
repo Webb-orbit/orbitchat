@@ -12,7 +12,6 @@ const Createorbit = () => {
 
     const signuporbit = async(data)=>{
         try {
-            console.log(data);
             const create = await AuthClient.firstcreate(data.username, data.password, data.name)
             if(create){
                 disp(storelogin(create.$id))

@@ -38,7 +38,6 @@ const Chat = () => {
         if (get) {
           setinitchat(get.chatsarr)
           setalldata(get)
-          console.log(get);
           await Chatbase.updatechat(chatid, { lastvisited: date })
         }
       } else {
@@ -111,12 +110,12 @@ const Chat = () => {
     <>
       <div className='w-full flex flex-col items-center h-full inter'>
         <div className=' self-start p-3 w-full flex items-center justify-between'>
-          <h2 className='text-[2rem]'>{alldata?alldata.title: <Skeleton height={"2.5rem"} width={"10rem"}/>}</h2>
+          <h2 className='text-[2rem] max-sm:text-[1.5rem] '>{alldata?alldata.title: <Skeleton height={"2.5rem"} width={"10rem"}/>}</h2>
           <button onClick={()=>setsettopenr(pre=> !pre)} className='material-symbols-outlined'>settings</button>
         </div>
         <div className='w-[60%] min-h-[60vh] h-full flex flex-col gap-4  items-end py-20 max-sm:w-[90%]'>
           {initchat.length!==0?initchat.map((e, i) => (
-            <div key={i} className='w-fit max-w-[100%]  h-full scrollbar overflow-x-scroll bg-neutral-100 px-2 pt-2 pb-1 rounded-md text-black'>
+            <div key={i} className='w-fit max-w-[100%]  h-full scrollbar overflow-x-scroll bg-neutral-200 font-medium px-2 pt-2 pb-1 rounded-md text-black'>
               <p className='text-wrap text-left whitespace-pre-wrap text-[0.9rem]'>{JSON.parse(e).massis}</p>
               <p className='text-wrap text-neutral-400 text-right text-[0.5rem] whitespace-pre-wrap'>{JSON.parse(e).nowtime}</p>
             </div>

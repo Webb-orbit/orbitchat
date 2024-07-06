@@ -15,7 +15,6 @@ const Menu = () => {
       let get = (await Chatbase.listchatbars(userid)).documents.reverse()
       if (get) {
         setfetching(true)
-        console.log(get)
         setlistchat(get)
       }
     } catch (error) {

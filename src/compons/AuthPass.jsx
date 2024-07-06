@@ -24,7 +24,6 @@ const AuthPass = ({ pass = true, auth = true, child }) => {
   }, [passmached, status, naviget])
 
   useEffect(() => {
-    console.log(location.pathname);
     dispatch(updateurl(location.pathname))
   }, [])
 

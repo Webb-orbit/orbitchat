@@ -30,7 +30,6 @@ const Password = () => {
             if (currentcode == watchany.code) {
                 naviget(prepage)
                 disp(passwordok())
-                console.log("prepage", prepage);
             }
         }
     }

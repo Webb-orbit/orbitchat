@@ -32,9 +32,9 @@ const Createorbit = () => {
         <form onSubmit={handleSubmit(signuporbit)} className='w-[55%]  flex flex-col gap-3 max-sm:gap-6 max-sm:w-[100%]'>
           <div>
             <input
-              {...register("username", {required:"required"})}
-              type="email" placeholder='username' className={` w-full outline-none  bg-neutral-700/80 py-1 px-2 rounded-sm ${errors.username && "border-[1px] border-red-500/70" }`} />
-              {errors.username && <p className='text-[0.7rem] text-red-300 font-medium'>{errors.username.message}</p>}
+              {...register("username", {required:"required", pattern:/\b[A-Za-z0-9._%+-]+@orbit\.io\b/})}
+              type="name" placeholder='example@orbit.io' className={` w-full outline-none  bg-neutral-700/80 py-1 px-2 rounded-sm ${errors.username && "border-[1px] border-red-500/70" }`} />
+              {errors.username && <p className='text-[0.7rem] text-red-300 font-medium'>{errors.username.message|| "ending with @orbit.io"}</p>}
           </div>
           <div>
             <input

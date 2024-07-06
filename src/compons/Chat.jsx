@@ -129,7 +129,7 @@ const Chat = () => {
             onChange={(e) => setmass(e.target.value)}
             spellCheck={false}
             disabled={sending}
-            placeholder='hello moto' className='w-[90%] h-[5rem] text-neutral-100 text-[0.9rem] bg-transparent border-none outline-none'></textarea>
+            placeholder='hello moto' className='w-[90%] h-[5rem] text-neutral-100 text-[0.9rem] bg-transparent border-none outline-none resize-none'></textarea>
 
           <button disabled={sending} className={`material-symbols-outlined p-1 text-[1rem] bg-white text-black rounded-full ${sending && "animate-pulse"} `} onClick={sendmass}>{sending ? "progress_activity" : "arrow_circle_up"}</button>
         </div>

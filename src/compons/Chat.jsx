@@ -14,21 +14,10 @@ const Chat = () => {
   const [alldata, setalldata] = useState(null)
   const [mass, setmass] = useState("")
   const [sending, setsending] = useState(false)
-  const [updater, setupdater] = useState(false)
   const [settopenr, setsettopenr] = useState(false)
   const naviget = useNavigate()
   const Dispatch = useDispatch()
 
-  const getchat = async () => {
-    try {
-      const get = await Chatbase.getchatbar(chatid)
-      if (get) {
-        setinitchat(get.chatsarr)
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   const firstget = async () => {
     try {
@@ -99,18 +88,20 @@ const Chat = () => {
   }
   
   useEffect(() => {
-   Chatbase.client.subscribe(`databases.${appwritedata.orbitbaseid}.collections.${appwritedata.chatcollid}.documents.${chatid}`, res => {
+    const unsubscribe = Chatbase.client.subscribe(`databases.${appwritedata.orbitbaseid}.collections.${appwritedata.chatcollid}.documents.${chatid}`, res => {
       setinitchat(res.payload.chatsarr)
       console.log("in the chat:", res)
     })
+
+    return()=>{
+      unsubscribe()
+    }
   }, [])
 
   useEffect(() => {
     firstget()
   }, [chatid])
-  useEffect(() => {
-    getchat()
-  }, [updater])
+
 
   return (
     <>
@@ -128,7 +119,6 @@ const Chat = () => {
           )) : <Skeleton count={6} height={"2.5rem"} width={"80vw"} />}
         </div>
         <div className='w-[98%] relative flex items-end justify-around bg-zinc-900 py-2 px-1'>
-          <button onClick={() => setupdater(pre => !pre)} className=' p-2 bg-white text-black rounded-full absolute bottom-24 left-2 material-symbols-outlined text-[1.1rem]'>circle</button>
           <textarea
             value={mass}
             onChange={(e) => setmass(e.target.value)}

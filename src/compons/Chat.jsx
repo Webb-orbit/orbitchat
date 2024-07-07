@@ -6,6 +6,7 @@ import Cards from './Cards'
 import { useDispatch } from 'react-redux'
 import { showt } from '../store/toastslice'
 import Skeleton from 'react-loading-skeleton'
+import appwritedata from '../appwrite/appwrite.config'
 
 const Chat = () => {
   const { userid, chatid } = useParams()
@@ -16,7 +17,7 @@ const Chat = () => {
   const [updater, setupdater] = useState(false)
   const [settopenr, setsettopenr] = useState(false)
   const naviget = useNavigate()
-  const Dispatch = useDispatch() 
+  const Dispatch = useDispatch()
 
   const getchat = async () => {
     try {
@@ -42,11 +43,11 @@ const Chat = () => {
         }
       } else {
         naviget("/")
-        Dispatch(showt({mass:"invalid argument", color:"text-black", time:2000, icon:"error"}))
+        Dispatch(showt({ mass: "invalid argument", color: "text-black", time: 2000, icon: "error" }))
       }
     } catch (error) {
       naviget("/")
-      Dispatch(showt({mass:"something wrong", color:"text-black", time:2000, icon:"error"}))
+      Dispatch(showt({ mass: "something wrong", color: "text-black", time: 2000, icon: "error" }))
       console.log(error);
     }
   }
@@ -61,18 +62,17 @@ const Chat = () => {
       const newchat = [...initchat, inputarr]
       const send = await Chatbase.updatechat(chatid, { chatsarr: newchat })
       if (send) {
-        setinitchat(send.chatsarr)
         setsending(false)
         setmass("")
       }
     } catch (error) {
-      Dispatch(showt({mass:"something wrong", color:"text-black", time:1000, icon:"error"}))
+      Dispatch(showt({ mass: "something wrong", color: "text-black", time: 1000, icon: "error" }))
       setsending(false)
       console.log(error);
     }
   }
 
-  const cleanup = async()=>{
+  const cleanup = async () => {
     try {
       const clean = await Chatbase.updatechat(chatid, { chatsarr: [] })
       if (clean) {
@@ -81,11 +81,11 @@ const Chat = () => {
       }
     } catch (error) {
       console.log(error);
-      Dispatch(showt({mass:"something wrong", color:"text-black", time:1000, icon:"error"}))
+      Dispatch(showt({ mass: "something wrong", color: "text-black", time: 1000, icon: "error" }))
     }
   }
 
-  const deletechat = async()=>{
+  const deletechat = async () => {
     try {
       const dele = await Chatbase.deletechat(chatid)
       if (dele) {
@@ -93,15 +93,21 @@ const Chat = () => {
         naviget("/")
       }
     } catch (error) {
-      Dispatch(showt({mass:"something wrong", color:"text-black", time:1000, icon:"error"}))
+      Dispatch(showt({ mass: "something wrong", color: "text-black", time: 1000, icon: "error" }))
       console.log(error);
     }
   }
+  
+  useEffect(() => {
+   Chatbase.client.subscribe(`databases.${appwritedata.orbitbaseid}.collections.${appwritedata.chatcollid}.documents.${chatid}`, res => {
+      setinitchat(res.payload.chatsarr)
+      console.log("in the chat:", res)
+    })
+  }, [])
 
   useEffect(() => {
     firstget()
   }, [chatid])
-
   useEffect(() => {
     getchat()
   }, [updater])
@@ -110,16 +116,16 @@ const Chat = () => {
     <>
       <div className='w-full flex flex-col items-center h-full inter'>
         <div className=' self-start p-3 w-full flex items-center justify-between'>
-          <h2 className='text-[2rem] max-sm:text-[1.5rem] '>{alldata?alldata.title: <Skeleton height={"2.5rem"} width={"10rem"}/>}</h2>
-          <button onClick={()=>setsettopenr(pre=> !pre)} className='material-symbols-outlined'>settings</button>
+          <h2 className='text-[2rem] max-sm:text-[1.5rem] '>{alldata ? alldata.title : <Skeleton height={"2.5rem"} width={"10rem"} />}</h2>
+          <button onClick={() => setsettopenr(pre => !pre)} className='material-symbols-outlined'>settings</button>
         </div>
         <div className='w-[60%] min-h-[60vh] h-full flex flex-col gap-4  items-end py-20 max-sm:w-[90%]'>
-          {initchat.length!==0?initchat.map((e, i) => (
+          {initchat.length !== 0 ? initchat.map((e, i) => (
             <div key={i} className='w-fit max-w-[100%]  h-full scrollbar overflow-x-scroll bg-neutral-200 font-medium px-2 pt-2 pb-1 rounded-md text-black'>
               <p className='text-wrap text-left whitespace-pre-wrap text-[0.9rem]'>{JSON.parse(e).massis}</p>
               <p className='text-wrap text-neutral-400 text-right text-[0.5rem] whitespace-pre-wrap'>{JSON.parse(e).nowtime}</p>
             </div>
-          )): <Skeleton count={6} height={"2.5rem"} width={"80vw"}/>}
+          )) : <Skeleton count={6} height={"2.5rem"} width={"80vw"} />}
         </div>
         <div className='w-[98%] relative flex items-end justify-around bg-zinc-900 py-2 px-1'>
           <button onClick={() => setupdater(pre => !pre)} className=' p-2 bg-white text-black rounded-full absolute bottom-24 left-2 material-symbols-outlined text-[1.1rem]'>circle</button>

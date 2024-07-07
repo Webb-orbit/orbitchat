@@ -13,23 +13,23 @@ class chat {
         this.database = new Databases(this.client)
     }
 
-    async listchatbars(id){
+    async listchatbars(id) {
         return await this.database.listDocuments(appwritedata.orbitbaseid, appwritedata.chatcollid, [Query.equal("userid", id)])
     }
 
-    async createchatbar(title, id){
-        return await this.database.createDocument(appwritedata.orbitbaseid, appwritedata.chatcollid, ID.unique(), {title:title, userid:id})
+    async createchatbar(title, id) {
+        return await this.database.createDocument(appwritedata.orbitbaseid, appwritedata.chatcollid, ID.unique(), { title: title, userid: id })
     }
 
-    async getchatbar(docid){
+    async getchatbar(docid) {
         return await this.database.getDocument(appwritedata.orbitbaseid, appwritedata.chatcollid, docid)
     }
 
-    async updatechat(docid,{chatsarr, lastvisited}){
-        return await this.database.updateDocument(appwritedata.orbitbaseid, appwritedata.chatcollid, docid,{chatsarr, lastvisited})
+    async updatechat(docid, { chatsarr, lastvisited }) {
+        return await this.database.updateDocument(appwritedata.orbitbaseid, appwritedata.chatcollid, docid, { chatsarr, lastvisited })
     }
 
-    async deletechat(id){
+    async deletechat(id) {
         return await this.database.deleteDocument(appwritedata.orbitbaseid, appwritedata.chatcollid, id)
     }
 

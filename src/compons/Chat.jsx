@@ -65,7 +65,6 @@ const Chat = () => {
     try {
       const clean = await Chatbase.updatechat(chatid, { chatsarr: [] })
       if (clean) {
-        setupdater(pre => !pre)
         setsettopenr(false)
       }
     } catch (error) {
@@ -112,9 +111,9 @@ const Chat = () => {
         </div>
         <div className='w-[60%] min-h-[60vh] h-full flex flex-col gap-4  items-end py-20 max-sm:w-[90%]'>
           {initchat.length !== 0 ? initchat.map((e, i) => (
-            <div key={i} className='w-fit max-w-[100%]  h-full scrollbar overflow-x-scroll bg-neutral-200 font-medium px-2 pt-2 pb-1 rounded-md text-black'>
+            <div key={i} className='min-w-[5rem] w-fit max-w-[100%]  h-full scrollbar overflow-x-scroll bg-neutral-200 font-medium px-2 pt-2 pb-1 rounded-md text-black'>
               <p className='text-wrap text-left whitespace-pre-wrap text-[0.9rem]'>{JSON.parse(e).massis}</p>
-              <p className='text-wrap text-neutral-400 text-right text-[0.5rem] whitespace-pre-wrap'>{JSON.parse(e).nowtime}</p>
+              <p className='text-wrap text-neutral-500 text-right text-[0.5rem] whitespace-pre-wrap'>{JSON.parse(e).nowtime}</p>
             </div>
           )) : <Skeleton count={6} height={"2.5rem"} width={"80vw"} />}
         </div>
@@ -132,8 +131,8 @@ const Chat = () => {
 
       <Cards lable={"settings"} setopener={setsettopenr} opener={settopenr}>
         <div className='p-4 flex flex-col gap-5'>
-          <button onClick={cleanup} className='flex items-center rounded-md bg-neutral-800/30 gap-6 px-5 py-2 text-[1.1rem] font-semibold capitalize'><span className='material-symbols-outlined'>vacuum</span>clean up </button>
-          <button onClick={deletechat} className='flex items-center rounded-md bg-neutral-800/30 gap-6 px-5 py-2 text-[1.1rem] font-semibold capitalize'><span className='material-symbols-outlined'>delete</span>destroy section </button>
+          <button onClick={cleanup} className='flex items-center rounded-md bg-neutral-800/80 gap-6 px-5 py-2 text-[1.1rem] font-semibold capitalize'><span className='material-symbols-outlined'>vacuum</span>clean up </button>
+          <button onClick={deletechat} className='flex items-center rounded-md bg-neutral-800/80 gap-6 px-5 py-2 text-[1.1rem] font-semibold capitalize'><span className='material-symbols-outlined'>delete</span>destroy section </button>
         </div>
       </Cards>
     </>

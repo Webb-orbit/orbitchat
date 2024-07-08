@@ -68,11 +68,7 @@ const Header = () => {
                 </form>
             </div>
             <div className="flex absolute w-[100%] h-full justify-center items-center ">
-                <canvas ref={canvasref}         style={{
-          width: 'min(100vmin, 800px)',
-          height: 'min(100vmin, 800px)',
-          margin: '20px auto',
-        }} className='absolute  h-[100%] w-[100%]'></canvas>
+                <canvas ref={canvasref} className='absolute  h-[100%] w-[100%]'></canvas>
             </div>
         </div>
     )

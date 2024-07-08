@@ -14,6 +14,7 @@ import AuthPass from './compons/AuthPass.jsx'
 import Profile from './compons/Profile.jsx'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { SkeletonTheme } from 'react-loading-skeleton'
+import Test from './compons/Test.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -29,6 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path='/code' element={<AuthPass pass={false} auth={true} child={<Password />}/>} />
             <Route path='/create-orbit' element={<AuthPass pass={false} auth={false} child={<Createorbit />}/>} />
             <Route path='/profile' element={<AuthPass pass={true} auth={true} child={<Profile />}/>} />
+            <Route path='/test' element={<Test/>} />
             <Route path='/chat/:userid/:chatid' element={<AuthPass pass={true} auth={true} child={<Chat />}/>} />
           </Route>
         </Routes>

@@ -13,7 +13,6 @@ const Header = () => {
     const { userid } = useSelector(state => state.authslice)
     const Dispatch = useDispatch() 
     const canvasref = useRef(null)
-    const [latlong, setlatlong] = useState(null)
     
     const createchats = async (data) => {
         try {
@@ -30,17 +29,9 @@ const Header = () => {
 
 
     useEffect(()=>{
-        navigator.geolocation.getCurrentPosition((position) => {
-            let lat = position.coords.latitude
-            let long = position.coords.longitude
-            console.log(lat, long, position);
-            setlatlong({lat,long})
-          });
-          if (canvasref.current && latlong !== null) {
-        console.log(latlong);
         let phi = 0;
         const globe = createGlobe(canvasref.current, {
-          devicePixelRatio: 2,
+          devicePixelRatio: 1,
           width: 350 * 2,
           height: 350 * 2,
           phi: 0,
@@ -53,7 +44,6 @@ const Header = () => {
           markerColor: [0.1, 0.8, 1],
           glowColor: [1, 1, 1],
           markers: [
-            { location: [latlong.lat, latlong.long], size: 0.05 },
             { location: [37.759523, -122.436765], size: 0.03 },
           ],
           onRender: (state) => {
@@ -66,7 +56,6 @@ const Header = () => {
             globe.destroy();
         };
         
-    }
         
     },[canvasref.current])
     return (

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { showt } from '../store/toastslice'
 import createGlobe from "cobe"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const Header = () => {
     const { setError, register, handleSubmit, formState: { errors } } = useForm()
@@ -13,6 +13,7 @@ const Header = () => {
     const { userid } = useSelector(state => state.authslice)
     const Dispatch = useDispatch() 
     const canvasref = useRef(null)
+    const [latlong, setlatlong] = useState(null)
     
     const createchats = async (data) => {
         try {
@@ -25,10 +26,19 @@ const Header = () => {
             setError("root", { message: error.response.message })
         }
     }
+    
+
 
     useEffect(()=>{
+        navigator.geolocation.getCurrentPosition((position) => {
+            let lat = position.coords.latitude
+            let long = position.coords.longitude
+            console.log(lat, long, position);
+            setlatlong({lat,long})
+          });
+          if (canvasref.current && latlong !== null) {
+        console.log(latlong);
         let phi = 0;
-
         const globe = createGlobe(canvasref.current, {
           devicePixelRatio: 2,
           width: 350 * 2,
@@ -37,27 +47,28 @@ const Header = () => {
           theta: 0,
           dark: 1,
           diffuse: 1.2,
-          mapSamples: 16000,
+          mapSamples: 10000,
           mapBrightness: 6,
           baseColor: [0.3, 0.3, 0.3],
           markerColor: [0.1, 0.8, 1],
           glowColor: [1, 1, 1],
           markers: [
-            { location: [37.7595, -122.4367], size: 0.03 },
-            { location: [40.7128, -74.006], size: 0.1 }
+            { location: [latlong.lat, latlong.long], size: 0.05 },
+            { location: [37.759523, -122.436765], size: 0.03 },
           ],
           onRender: (state) => {
-            // Called on every animation frame.
-            // `state` will be an empty object, return updated params.
             state.phi = phi;
             phi += 0.01;
           }
         });
     
         return () => {
-          globe.destroy();
+            globe.destroy();
         };
-    },[])
+        
+    }
+        
+    },[canvasref.current])
     return (
         <div className='h-[20rem] w-full bg-zinc-800 relative select-none flex items-center justify-center py-5'>
             <div className='z-[2] flex flex-col items-center justify-around h-full w-full max-sm:justify-end max-sm:gap-5'>

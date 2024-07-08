@@ -1,11 +1,10 @@
-import baner from "../assets/104057.jpg"
 import { useForm } from 'react-hook-form'
 import Chatbase from '../appwrite/chatbase'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { showt } from '../store/toastslice'
 import createGlobe from "cobe"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 
 const Header = () => {
     const { setError, register, handleSubmit, formState: { errors } } = useForm()
@@ -26,14 +25,12 @@ const Header = () => {
         }
     }
 
-
-
     useEffect(() => {
         let phi = 0;
         const globe = createGlobe(canvasref.current, {
             devicePixelRatio: 2,
-            width: 350 * 2,
-            height: 350 * 2,
+            width: canvasref.current.offsetWidth * 2,
+            height: canvasref.current.offsetHeight * 2 ,
             phi: 0,
             theta: 0.2,
             dark: 1.1,
@@ -54,7 +51,7 @@ const Header = () => {
         return () => globe.destroy()
     }, [canvasref.current])
     return (
-        <div className='h-[20rem] w-full bg-zinc-800 relative select-none flex items-center justify-center py-5'>
+        <div className='h-[20rem] w-full bg-zinc-900 relative select-none flex items-center justify-center py-5'>
             <div className='z-[2] flex flex-col items-center justify-around h-full w-full max-sm:justify-end max-sm:gap-5'>
                 <h1 className='text-[2rem] capitalize font-semibold max-sm:text-[1.5rem]'>create sections of chat</h1>
                 <form onSubmit={handleSubmit(createchats)} className=' flex gap-1 flex-col'>
@@ -68,8 +65,8 @@ const Header = () => {
                     </div>
                 </form>
             </div>
-            <div className="flex absolute w-[100%] h-full justify-center items-center ">
-                <canvas ref={canvasref} className='absolute  h-[100%] w-[100%]'></canvas>
+            <div className="flex absolute  w-[100%] h-full justify-center items-center ">
+                <canvas ref={canvasref} className=' h-[100%] '></canvas>
             </div>
         </div>
     )

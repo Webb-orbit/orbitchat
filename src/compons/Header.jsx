@@ -6,6 +6,8 @@ import { showt } from '../store/toastslice'
 import createGlobe from "cobe"
 import { useEffect, useRef, useState } from "react"
 import Cards from './Cards'
+import { useSpring } from '@react-spring/web';
+
 
 const Header = () => {
     const { setError, register, handleSubmit, formState: { errors } } = useForm()
@@ -15,6 +17,17 @@ const Header = () => {
     const canvasref = useRef(null)
     const [addopener, setaddopener] = useState(false)
     const [latlong, setlatlong] = useState(null)
+    const pointerInteracting = useRef(null);
+    const pointerInteractionMovement = useRef(0);
+    const [{ r }, api] = useSpring(() => ({
+        r: 0,
+        config: {
+            mass: 1,
+            tension: 280,
+            friction: 40,
+            precision: 0.001,
+        },
+    }));
 
     const createchats = async (data) => {
         try {
@@ -35,11 +48,11 @@ const Header = () => {
             console.log(lat, long);
             setlatlong({lat,long})
         })
-            
-            let phi = 0;
-            const globe = createGlobe(canvasref.current, {
+        let phi = 0;
+        canvasref.current.width = canvasref.current.offsetHeight*2
+        const globe = createGlobe(canvasref.current, {
             devicePixelRatio: 2,
-            width: canvasref.current.offsetWidth * 2,
+            width: canvasref.current.offsetHeight * 2,
             height: canvasref.current.offsetHeight * 2,
             phi: 0,
             theta: 0.2,
@@ -50,28 +63,63 @@ const Header = () => {
             mapBaseBrightness: .05,
             baseColor: [1.1, 1.1, 1.1],
             markerColor: [251 / 255, 100 / 255, 21 / 255],
-            glowColor: [1.1, 1.1, 1.1],
+            glowColor: [1, 1, 1],
             markers: [
                 { location: [37.7595, -122.4367], size: 0.03 },
                 { location: [40.7128, -74.006], size: 0.1 },
-                { location: [latlong?.lat || 23, latlong?.long || 80], size: 0.05 },
+                { location: [latlong?.lat || 52.5200, latlong?.long || 13.4050], size: 0.05 },
             ],
             opacity: .7,
             onRender: (state) => {
-                state.phi = phi;
-                phi += 0.01;
+                state.phi = phi + r.get()
+                phi += 0.01
             }
-        });
+        })
+
         return () => globe.destroy()
     }, [canvasref.current])
     return (
         <>
-        <div className='h-[20rem] w-full overflow-hidden bg-zinc-900 relative select-none flex items-center justify-center py-2'>
-            <div className=' w-full z-20 self-start flex items-center justify-end  p-2'>
+        <div className='h-[20rem] w-full overflow-hidden bg-zinc-900 relative select-none  py-2'>
+            <div className=' w-fit absolute z-20 right-2  p-2'>
                 <button onClick={()=> setaddopener(pre=> !pre)} className='material-symbols-outlined py-2 px-2 bg-white text-black rounded-md'>add </button>
             </div>
-            <div className="flex absolute  w-[100%] h-full justify-center items-center ">
-                <canvas ref={canvasref} className=' h-[100%] '></canvas>
+            <div className="flex w-[100%] h-full justify-center items-center ">
+                <canvas 
+                className=' rounded-full h-[100%] '
+                ref={canvasref} 
+                 onPointerDown={(e) => {
+                    pointerInteracting.current =
+                        e.clientX - pointerInteractionMovement.current;
+                        canvasref.current.style.cursor = 'grabbing';
+                }}
+                onPointerUp={() => {
+                    pointerInteracting.current = null;
+                    canvasref.current.style.cursor = 'grab';
+                }}
+                onPointerOut={() => {
+                    pointerInteracting.current = null;
+                    canvasref.current.style.cursor = 'grab';
+                }}
+                onMouseMove={(e) => {
+                    if (pointerInteracting.current !== null) {
+                        const delta = e.clientX - pointerInteracting.current;
+                        pointerInteractionMovement.current = delta;
+                        api.start({
+                            r: delta / 200,
+                        });
+                    }
+                }}
+                onTouchMove={(e) => {
+                    if (pointerInteracting.current !== null && e.touches[0]) {
+                        const delta = e.touches[0].clientX - pointerInteracting.current;
+                        pointerInteractionMovement.current = delta;
+                        api.start({
+                            r: delta / 100,
+                        });
+                    }
+                }}
+                ></canvas>
             </div>
         </div>
 

@@ -35,22 +35,23 @@ const Header = () => {
             width: 350 * 2,
             height: 350 * 2,
             phi: 0,
-            theta: 0,
-            dark: 1,
-            diffuse: 1.2,
-            mapSamples: 10000,
-            mapBrightness: 6,
-            baseColor: [0.3, 0.3, 0.3],
-            markerColor: [0.1, 0.8, 1],
-            glowColor: [1, 1, 1],
-            markers: [
-                { location: [37.759523, -122.436765], size: 0.03 },
-            ],
+            theta: 0.2,
+            dark: 1.1,
+            diffuse: 3,
+            mapSamples: 16000,
+            mapBrightness: 1.8,
+            mapBaseBrightness: .05,
+            baseColor: [1.1, 1.1, 1.1],
+            markerColor: [251 / 255, 100 / 255, 21 / 255],
+            glowColor: [1.1, 1.1, 1.1],
+            markers: [],
+            opacity: .7,
             onRender: (state) => {
                 state.phi = phi;
                 phi += 0.01;
             }
         });
+        return () => globe.destroy()
     }, [canvasref.current])
     return (
         <div className='h-[20rem] w-full bg-zinc-800 relative select-none flex items-center justify-center py-5'>

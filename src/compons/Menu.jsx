@@ -37,7 +37,7 @@ const Menu = () => {
                 <p className=' font-semibold'>{e.title}</p>
                 <p className='text-[0.7rem] text-neutral-300'>{e.lastvisited}</p>
               </div>
-              <p className='text-[0.8rem] whitespace-pre-wrap text-wrap text-neutral-300'>{e.chatsarr.length !== 0 ? (JSON.parse(e.chatsarr[e.chatsarr.length - 1]).massis.substring(0, 90)) : "......"}</p>
+              <p className='text-[0.8rem] whitespace-pre-wrap text-wrap text-neutral-300'>{e.chatsarr.length !== 0 ? (JSON.parse(e.chatsarr[e.chatsarr.length - 1]).m.substring(0, 90)) : "......"}</p>
             </div>
           </Link>
         )):<h2>no chats fount</h2>}

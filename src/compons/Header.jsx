@@ -7,6 +7,7 @@ import createGlobe from "cobe"
 import { useEffect, useRef, useState } from "react"
 import Cards from './Cards'
 import { useSpring } from '@react-spring/web';
+import Glob from './Glob'
 
 
 const Header = () => {
@@ -81,11 +82,11 @@ const Header = () => {
         <>
         <div className='h-[20rem] w-full overflow-hidden bg-zinc-900 relative select-none  py-2'>
             <div className=' w-fit absolute z-20 right-2  p-2'>
-                <button onClick={()=> setaddopener(pre=> !pre)} className='material-symbols-outlined py-2 px-2 bg-white text-black rounded-md'>add </button>
+                <button onClick={()=> setaddopener(pre=> !pre)} className='material-symbols-outlined p-1 bg-white text-black rounded-md'>add </button>
             </div>
             <div className="flex w-[100%] h-full justify-center items-center ">
                 <canvas 
-                className=' rounded-full h-[100%] '
+                className=' w-[20rem] rounded-full h-[20rem]'
                 ref={canvasref} 
                  onPointerDown={(e) => {
                     pointerInteracting.current =

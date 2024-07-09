@@ -44,10 +44,10 @@ const Chat = () => {
   const sendmass = async () => {
     if (mass == "") return
     try {
-      let nowtime = new Date().toTimeString().substring(0, 5)
+      let t = new Date().toTimeString().substring(0, 5)
       setsending(true)
-      let massis = mass.trim()
-      let inputarr = JSON.stringify({ massis, nowtime })
+      let m = mass.trim()
+      let inputarr = JSON.stringify({ m, t })
       const newchat = [...initchat, inputarr]
       const send = await Chatbase.updatechat(chatid, { chatsarr: newchat })
       if (send) {
@@ -112,8 +112,8 @@ const Chat = () => {
         <div className='w-[60%] min-h-[60vh] h-full flex flex-col gap-4  items-end py-20 max-sm:w-[90%]'>
           {initchat.length !== 0 ? initchat.map((e, i) => (
             <div key={i} className='min-w-[5rem] w-fit max-w-[100%]  h-full scrollbar overflow-x-scroll bg-neutral-200 font-medium px-2 pt-2 pb-1 rounded-md text-black'>
-              <p className='text-wrap text-left whitespace-pre-wrap text-[0.9rem]'>{JSON.parse(e).massis}</p>
-              <p className='text-wrap text-neutral-500 text-right text-[0.5rem] whitespace-pre-wrap'>{JSON.parse(e).nowtime}</p>
+              <p className='text-wrap text-left whitespace-pre-wrap text-[0.9rem]'>{JSON.parse(e).m}</p>
+              <p className='text-wrap text-neutral-500 text-right text-[0.5rem] whitespace-pre-wrap'>{JSON.parse(e).t}</p>
             </div>
           )) : <Skeleton count={6} height={"2.5rem"} width={"80vw"} />}
         </div>

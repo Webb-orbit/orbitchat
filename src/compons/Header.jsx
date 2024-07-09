@@ -7,7 +7,6 @@ import createGlobe from "cobe"
 import { useEffect, useRef, useState } from "react"
 import Cards from './Cards'
 import { useSpring } from '@react-spring/web';
-import Glob from './Glob'
 
 
 const Header = () => {
@@ -46,7 +45,6 @@ const Header = () => {
         navigator.geolocation.getCurrentPosition((e)=>{
             let lat = e.coords.latitude
             let long = e.coords.longitude
-            console.log(lat, long);
             setlatlong({lat,long})
         })
         let phi = 0;
@@ -80,7 +78,7 @@ const Header = () => {
     }, [canvasref.current])
     return (
         <>
-        <div className='h-[20rem] w-full overflow-hidden bg-zinc-900 relative select-none  py-2'>
+        <div className='h-[20rem] w-full overflow-hidden  relative select-none  py-2'>
             <div className=' w-fit absolute z-20 right-2  p-2'>
                 <button onClick={()=> setaddopener(pre=> !pre)} className='material-symbols-outlined p-1 bg-white text-black rounded-md'>add </button>
             </div>

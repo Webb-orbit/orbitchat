@@ -49,7 +49,6 @@ const Header = () => {
             setlatlong({lat,long})
         })
         let phi = 0;
-        canvasref.current.width = canvasref.current.offsetHeight*2
         const globe = createGlobe(canvasref.current, {
             devicePixelRatio: 2,
             width: canvasref.current.offsetHeight * 2,

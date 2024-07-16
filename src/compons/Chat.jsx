@@ -87,6 +87,7 @@ const Chat = () => {
   }
   
   useEffect(() => {
+    console.log("hi realtime");
     const unsubscribe = Chatbase.client.subscribe(`databases.${appwritedata.orbitbaseid}.collections.${appwritedata.chatcollid}.documents.${chatid}`, res => {
       setinitchat(res.payload.chatsarr)
       console.log("in the chat:", res)
@@ -104,7 +105,7 @@ const Chat = () => {
 
   return (
     <>
-      <div className='w-full flex flex-col items-center h-screen inter justify-between'>
+      <div className='w-full flex flex-col items-center h-full inter justify-between'>
         <div className=' self-start p-3 w-full flex items-center justify-between'>
           <h2 className='text-[2rem] max-sm:text-[1.5rem] '>{alldata ? alldata.title : <Skeleton height={"2.5rem"} width={"10rem"} />}</h2>
           <button onClick={() => setsettopenr(pre => !pre)} className='material-symbols-outlined'>settings</button>
@@ -125,7 +126,7 @@ const Chat = () => {
             spellCheck={false}
             disabled={sending}
             placeholder='hello moto' className='w-[90%] h-[5rem] text-neutral-100 text-[0.9rem] bg-transparent border-none outline-none resize-none'></textarea>
-          <button disabled={sending} className={`material-symbols-outlined p-1 text-[1rem] bg-white text-black rounded-full ${sending && "animate-pulse"} `} onClick={sendmass}>{sending ? "progress_activity" : "arrow_circle_up"}</button>
+          <button disabled={sending} className={` self-start material-symbols-outlined p-1 text-[1rem] bg-white text-black rounded-full ${sending && "animate-pulse"} `} onClick={sendmass}>{sending ? "progress_activity" : "arrow_circle_up"}</button>
         </div>
       </div>
 

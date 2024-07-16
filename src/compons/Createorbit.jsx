@@ -49,7 +49,7 @@ const Createorbit = () => {
           <button type='submit' disabled={isSubmitting} className={` uppercase text-[1rem] bg-green-500 rounded-md py-1 font-medium text-black ${isSubmitting && "animate-pulse cursor-wait"}`}>submit</button>
         </form>
         <div >
-          <p className=' capitalize text-[0.9rem] font-medium'>allrady have an orbiter <Link to={"/login"} className='text-green-300'>login new</Link></p>
+          <p className=' capitalize text-[0.9rem] font-medium'>allrady have an orbiter <Link to={"/login"} className='text-green-300'>connect now</Link></p>
         </div>
       </div>
     </div>

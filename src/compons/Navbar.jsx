@@ -22,9 +22,9 @@ const Navbar = () => {
         {status &&<Link to={"/profile"}>
         profile
         </Link>}
-        <div className='hidden max-sm:block'>
+        {status && <div className='hidden max-sm:block'>
           <button className='material-symbols-outlined' onClick={()=> setmenuopener(pre=>!pre)}>menu</button>
-        </div>
+        </div>}
       </div>
     </div>
 

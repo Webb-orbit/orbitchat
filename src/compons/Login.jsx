@@ -24,7 +24,7 @@ const Login = () => {
   return (
     <div className='w-full h-full flex items-center justify-center '>
       <div className='w-[60%] flex flex-col items-center gap-3 max-sm:w-[90%]'>
-        <h3 className='text-[2rem] capitalize font-semibold select-none max-sm:text-[1.5rem] max-sm:self-start'>login to an orbiter</h3>
+        <h3 className='text-[2rem] capitalize font-semibold select-none max-sm:text-[1.5rem] max-sm:self-start'>connect to an orbiter</h3>
         {errors.root && <p className='text-red-300 text-[0.8rem] animate-pulse'>{errors.root.message?errors.root.message:"opps!"}</p>}
         <form onSubmit={handleSubmit(loginsubmit)} className='w-[55%]  flex flex-col gap-3 max-sm:gap-6 max-sm:w-[100%]'>
           <div>

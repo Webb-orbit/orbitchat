@@ -104,7 +104,7 @@ const Chat = () => {
 
   return (
     <>
-      <div className='w-full flex flex-col items-center h-full inter'>
+      <div className='w-full flex flex-col items-center h-screen inter justify-between'>
         <div className=' self-start p-3 w-full flex items-center justify-between'>
           <h2 className='text-[2rem] max-sm:text-[1.5rem] '>{alldata ? alldata.title : <Skeleton height={"2.5rem"} width={"10rem"} />}</h2>
           <button onClick={() => setsettopenr(pre => !pre)} className='material-symbols-outlined'>settings</button>
@@ -117,14 +117,14 @@ const Chat = () => {
             </div>
           )) : <Skeleton count={6} height={"2.5rem"} width={"80vw"} />}
         </div>
-        <div className='w-[98%] relative flex items-end justify-around bg-zinc-900 py-2 px-1'>
+
+        <div className='w-[98%] relative flex items-top justify-around bg-zinc-900 py-2 px-1'>
           <textarea
             value={mass}
             onChange={(e) => setmass(e.target.value)}
             spellCheck={false}
             disabled={sending}
             placeholder='hello moto' className='w-[90%] h-[5rem] text-neutral-100 text-[0.9rem] bg-transparent border-none outline-none resize-none'></textarea>
-
           <button disabled={sending} className={`material-symbols-outlined p-1 text-[1rem] bg-white text-black rounded-full ${sending && "animate-pulse"} `} onClick={sendmass}>{sending ? "progress_activity" : "arrow_circle_up"}</button>
         </div>
       </div>

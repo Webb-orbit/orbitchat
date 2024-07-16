@@ -68,7 +68,7 @@ const Profile = () => {
         <div>
         <h3 className=' capitalize text-[2rem] font-medium  text-neutral-400 '>denger zone</h3>
         <p className='txet-[0.8rem] text-neutral-300'>logout won't delete your Account!</p>
-        {/* <p className=' capitalize'>taniya be carefull 🤖</p> */}
+        <p className='capitalize'>taniya be carefull 🪺</p>
         </div>
         <button onClick={logoutfun} className={` bg-red-500 py-1 rounded-md font-semibold text-black uppercase ${louing && "animate-pulse"}`}>logout</button>
       </div>

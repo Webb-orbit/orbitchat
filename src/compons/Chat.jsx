@@ -96,7 +96,7 @@ const Chat = () => {
     return()=>{
       unsubscribe()
     }
-  }, [])
+  }, [chatid])
 
   useEffect(() => {
     firstget()

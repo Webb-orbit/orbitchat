@@ -47,6 +47,9 @@ const Password = () => {
                     {...register("code")}
                     type="text" placeholder='code' className=' text-black placeholder:text-black w-full outline-none  bg-neutral-200 py-1 px-2 rounded-sm' />
             </div>
+            <div className=' capitalize '>
+            how to use <Link to={"/how-to-use"} className='text-green-500'>this app</Link>
+            </div>
         </div>
     ) : <div className='w-full h-screen flex items-center justify-center capitalize font-medium text-green-400 inter'><Link to={"/"}>back home</Link></div>
 }

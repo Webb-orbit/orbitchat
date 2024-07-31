@@ -15,6 +15,7 @@ import Profile from './compons/Profile.jsx'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { SkeletonTheme } from 'react-loading-skeleton'
 import Test from './compons/Test.jsx'
+import Howtouse from './compons/Howtouse.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -31,6 +32,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path='/create-orbit' element={<AuthPass pass={false} auth={false} child={<Createorbit />}/>} />
             <Route path='/profile' element={<AuthPass pass={true} auth={true} child={<Profile />}/>} />
             <Route path='/test' element={<Test/>} />
+            <Route path='/how-to-use' element={<Howtouse/>} />
             <Route path='/chat/:userid/:chatid' element={<AuthPass pass={true} auth={true} child={<Chat />}/>} />
           </Route>
         </Routes>

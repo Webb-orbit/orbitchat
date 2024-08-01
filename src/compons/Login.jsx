@@ -44,6 +44,9 @@ const Login = () => {
 
         <div >
           <p className='capitalize text-[0.9rem] font-medium'>dont have an orbiter <Link to={"/create-orbit"} className='text-green-300'>create new</Link></p>
+          <div className=' capitalize '>
+            how to use <Link to={"/how-to-use"} className='text-green-500'>this app</Link>
+            </div>
         </div>
       </div>
     </div>

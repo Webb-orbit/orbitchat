@@ -8,7 +8,6 @@ import { useEffect, useRef, useState } from "react"
 import Cards from './Cards'
 import { useSpring } from '@react-spring/web';
 
-
 const Header = () => {
     const { setError, register, handleSubmit, formState: { errors } } = useForm()
     const navi = useNavigate()
@@ -16,7 +15,6 @@ const Header = () => {
     const Dispatch = useDispatch()
     const canvasref = useRef(null)
     const [addopener, setaddopener] = useState(false)
-    const [latlong, setlatlong] = useState(null)
     const pointerInteracting = useRef(null);
     const pointerInteractionMovement = useRef(0);
     const [{ r }, api] = useSpring(() => ({
@@ -42,11 +40,6 @@ const Header = () => {
     }
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition((e)=>{
-            let lat = e.coords.latitude
-            let long = e.coords.longitude
-            setlatlong({lat,long})
-        })
         let phi = 0;
         const globe = createGlobe(canvasref.current, {
             devicePixelRatio: 2,
@@ -65,7 +58,6 @@ const Header = () => {
             markers: [
                 { location: [37.7595, -122.4367], size: 0.03 },
                 { location: [40.7128, -74.006], size: 0.1 },
-                { location: [latlong?.lat || 52.5200, latlong?.long || 13.4050], size: 0.05 },
             ],
             opacity: .7,
             onRender: (state) => {

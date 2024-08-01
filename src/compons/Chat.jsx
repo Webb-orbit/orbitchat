@@ -90,7 +90,6 @@ const Chat = () => {
     console.log("hi realtime");
     const unsubscribe = Chatbase.client.subscribe(`databases.${appwritedata.orbitbaseid}.collections.${appwritedata.chatcollid}.documents.${chatid}`, res => {
       setinitchat(res.payload.chatsarr)
-      console.log("in the chat:", res)
     })
 
     return()=>{

@@ -7,12 +7,12 @@ const Howtouse = () => {
             <li>sign up or log in </li>
             <li>share you username and Password your friend to connect you chat </li>
             <li>and that it enjoy you chat to your friends </li>
-            <br />
-            <br />
         </ul>
-        <b>crack default Password == im&lt;number&gt;multiply by 2</b>
-        <p>the number is suppose 123</p>
-        <p>the password is im246</p>
+            <br />
+            <br />
+        <p>crack default Password = im&lt;number&gt;multiply by 2</p>
+        <p> for example the number is 123</p>
+        <p>so the password is im246</p>
     </div>
   )
 }

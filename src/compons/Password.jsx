@@ -45,6 +45,7 @@ const Password = () => {
                 <p className='text-[1.1rem] text-neutral-200 uppercase font-medium'>{number}</p>
                 <input
                     {...register("code")}
+                    autoComplete="off"
                     type="text" placeholder='code' className=' text-black placeholder:text-black w-full outline-none  bg-neutral-200 py-1 px-2 rounded-sm' />
             </div>
             <div className=' capitalize '>

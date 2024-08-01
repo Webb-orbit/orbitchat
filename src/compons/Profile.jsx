@@ -53,6 +53,9 @@ const Profile = () => {
         </div>
         <h2 className=' text-[1.7rem] font-medium text-neutral-300 max-sm:text-[1.2rem] '>orbit provider: {user.email || <Skeleton  height={"1.5rem"} width={"10rem"}/>}</h2>
       </div>
+      <div className=' capitalize '>
+            how to use <Link to={"/how-to-use"} className='text-green-500'>this app</Link>
+            </div>
       <div className='w-[90%] flex flex-col gap-5 pb-5 border-b-2 h-[50vh] overflow-y-scroll'>
         <h3>Sessions:</h3>
         {sessins.length!==0?sessins.map((e) => (
